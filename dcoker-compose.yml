@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+   ssolutions-generate:
+     image: appc.cloud:5000/ssolutions-generation-backend:latest
+     environment:
+       DB_HOST: 172.31.16.99
+       DB_PORT: 3306
+       DB_NAME: ssolutions-madrim
+       DB_USER: admin
+       DB_PASSWORD: Banco_Ssolutions_2023
+       AWS_ACCESS_KEY_ID: AKIA5NGG2ZG76Y33QFBO
+       AWS_SECRET_ACCESS_KEY: 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
+       AWS_REGION: us-east-1
+       AWS_S3_BUCKET: appc-ssolutions-file-system
+       SECRET_KEY: regis_2023_4060#gremio
+     networks:
+       - traefik-public
+     deploy:
+       labels:     
+         - "traefik.enable=true"
+         - "traefik.docker.network=traefik-public"
+         - "traefik.http.routers.gen.rule=Host(`poatech.com.br`) && PathPrefix(`/code`)"
+         - "traefik.http.routers.gen.service=gen-service"
+         - "traefik.http.services.gen-service.loadbalancer.server.port=4000"
