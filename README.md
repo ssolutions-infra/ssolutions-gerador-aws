@@ -1,0 +1,1 @@
+# ssolutions-gerador-aws
