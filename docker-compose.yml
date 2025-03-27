@@ -22,3 +22,8 @@ services:
          - "traefik.http.routers.gen.rule=Host(`poatech.com.br`) && PathPrefix(`/code`)"
          - "traefik.http.routers.gen.service=gen-service"
          - "traefik.http.services.gen-service.loadbalancer.server.port=4000"
+
+         
+networks:
+  traefik-public:
+    external: true
